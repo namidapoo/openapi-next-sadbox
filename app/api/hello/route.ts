@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
 	const searchParams = request.nextUrl.searchParams;
-	const query = searchParams.get("query") || "default";
+	const q = searchParams.get("q") || "default";
 	const errorType = searchParams.get("error");
 
 	if (errorType === "400") {
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	return NextResponse.json({
-		message: `Received GET request. Query: ${query}`,
+		message: `Received GET request. Query: ${q}`,
 		timestamp: new Date().toISOString(),
 	});
 }
