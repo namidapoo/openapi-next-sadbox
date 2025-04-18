@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Hello API
+  description: Sample API for Next.js App Router
+  version: 1.0.0
+servers:
+  - url: /api
+    description: Default server
+paths:
+  /hello:
+    get:
+      summary: Get data
+      description: Retrieve data based on query parameters
+      parameters:
+        - name: query
+          in: query
+          description: Search query
+          required: false
+          schema:
+            type: string
+            default: default
+        - name: error
+          in: query
+          description: Test parameter for error responses (400, 404, 500)
+          required: false
+          schema:
+            type: string
+            enum: [400, 404, 500]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Received GET request. Query: test"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: '2023-09-01T12:00:00Z'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid request"
+                  details:
+                    type: string
+                    example: "Request parameters are incorrect"
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Resource not found"
+                  details:
+                    type: string
+                    example: "The specified resource does not exist"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Server error occurred"
+                  details:
+                    type: string
+                    example: "An unexpected error occurred during processing"
+    post:
+      summary: Create data
+      description: Create new data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              example:
+                name: "Test data"
+                value: 123
+      responses:
+        '201':
+          description: Data created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data created successfully"
+                  receivedData:
+                    type: object
+                    additionalProperties: true
+                    example:
+                      name: "Test data"
+                      value: 123
+    put:
+      summary: Update data
+      description: Update existing data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              example:
+                id: 123
+                name: "Updated data"
+      responses:
+        '200':
+          description: Data updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data updated successfully"
+                  receivedData:
+                    type: object
+                    additionalProperties: true
+                    example:
+                      id: 123
+                      name: "Updated data"
+    delete:
+      summary: Delete data
+      description: Delete data with the specified ID
+      parameters:
+        - name: id
+          in: query
+          description: ID of the data to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Data deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Data with ID: 123 has been deleted"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "ID is not specified"
