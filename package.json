@@ -10,12 +10,16 @@
 		"start": "next start",
 		"format": "bunx biome format --write ./",
 		"lint": "bunx biome lint ./",
-		"check": "bunx biome check --write ./"
+		"check": "bunx biome check --write ./",
+		"update-api-types": "openapi-typescript ./openapi.yml -o ./lib/schema.d.ts",
+		"typecheck": "tsc --noEmit",
+		"typecheck:watch": "tsc --noEmit --watch"
 	},
 	"dependencies": {
+		"next": "15.3.1",
+		"openapi-fetch": "^0.13.5",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"next": "15.3.1"
+		"react-dom": "^19.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -24,6 +28,7 @@
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"lefthook": "^1.11.10",
+		"openapi-typescript": "^7.6.1",
 		"tailwindcss": "^4",
 		"typescript": "^5"
 	}
