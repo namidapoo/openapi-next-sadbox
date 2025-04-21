@@ -12,7 +12,7 @@ paths:
       summary: Get data
       description: Retrieve data based on query parameters
       parameters:
-        - name: q
+        - name: query
           in: query
           description: Search query
           required: false
