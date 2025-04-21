@@ -19,7 +19,7 @@ export interface paths {
 			parameters: {
 				query?: {
 					/** @description Search query */
-					q?: string;
+					query?: string;
 					/** @description Test parameter for error responses (400, 404, 500) */
 					error?: 400 | 404 | 500;
 				};
